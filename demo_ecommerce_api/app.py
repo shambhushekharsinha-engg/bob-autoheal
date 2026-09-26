@@ -12,7 +12,7 @@ Bugs:
 """
 
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Dict
 
 app = FastAPI(
@@ -31,7 +31,7 @@ inventory: Dict[str, int] = {
 
 class Order(BaseModel):
     item: str
-    quantity: int
+    quantity: int = Field(..., gt=0, description="Must be >= 1")
 
 
 @app.get("/", summary="Health check")
@@ -46,13 +46,13 @@ def get_inventory():
 
 @app.post("/order", summary="Place an order")
 def place_order(order: Order):
-    # BUG-001: No check for item existence — raises unhandled KeyError → HTTP 500
-    # BUG-002: Negative quantities accepted (e.g., quantity=-5 increases stock)
+    if order.item not in inventory:
+        raise HTTPException(status_code=404, detail=f"Item '{order.item}' not found")
+
     stock = inventory[order.item]
 
-    # BUG-003 / BUG-004: Out-of-stock raises HTTP 500 instead of HTTP 400
     if order.quantity > stock:
-        raise HTTPException(status_code=500, detail="Not enough stock")
+        raise HTTPException(status_code=400, detail=f"Not enough stock. Available: {stock}, requested: {order.quantity}")
 
     inventory[order.item] -= order.quantity
     return {
