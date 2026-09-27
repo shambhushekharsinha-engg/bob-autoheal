@@ -4,6 +4,13 @@
 > Theme: *Build with purpose using IBM Bob 2.0*
 > Category: Automated Testing & Validation Hub
 
+![Bob AutoHeal Cover](docs/project_cover.jpg)
+
+## 🎥 Watch the Demo
+
+[![Watch the Demo on YouTube](docs/youtube_thumbnail.jpg)](https://www.youtube.com/watch?v=5B3lI1dOyrI)
+*Click the image above to watch the full 2.5-minute AutoHeal demonstration on YouTube.*
+
 ---
 
 ## Problem Statement
