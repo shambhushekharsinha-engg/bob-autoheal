@@ -205,7 +205,8 @@ All data used in this project is:
 
 ## Team
 
-> *Add your team name and members here.*
+**Team Name:** DevPulse AI  
+**Member:** Shambhu Shekhar Sinha
 
 ---
 
