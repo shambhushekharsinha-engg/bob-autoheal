@@ -34,3 +34,6 @@ Thumbs.db
 # Temporary files
 extracted.txt
 *.log
+
+# Media
+*.mp4
